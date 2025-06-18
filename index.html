@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bautizo de Marc Ezio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="oval-photo">
+            <img src="img/foto1.jpg" alt="Marc Ezio">
+        </div>
+        <div class="ribbon">
+            <h1>Marc Ezio</h1>
+        </div>
+        <a href="mi-bautizo.html" class="btn-ingresar" id="ingresarBtn">Ingresando (5)</a>
+    </div>
+
+    <script>
+        // Redirección automática después de 5 segundos
+        setTimeout(function() {
+            window.location.href = "mi-bautizo.html";
+        }, 5000);
+
+        // Contador regresivo en el botón
+        let seconds = 5;
+        const ingresarBtn = document.getElementById('ingresarBtn');
+        
+        const countdown = setInterval(function() {
+            seconds--;
+            ingresarBtn.textContent = `Ingresando (${seconds})`;
+            
+            if (seconds <= 0) {
+                clearInterval(countdown);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

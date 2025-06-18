@@ -1,0 +1,705 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    padding-top: 80px; /* Para compensar el header fijo */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+/* Estilos para index.html */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #8ECAE6 0%, #219EBC 100%);
+    text-align: center;
+    padding: 20px;
+}
+
+.oval-photo {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 10px solid #FFB703;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    margin-bottom: 30px;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.oval-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.oval-photo::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 3px dashed #FFB703;
+    border-radius: 50%;
+    z-index: -1;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.oval-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ribbon {
+    background-color: #FFB703;
+    color: #023047;
+    padding: 15px 40px;
+    border-radius: 30px;
+    margin: 20px 0;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    font-size: 1.2rem;
+    transform: rotate(-2deg);
+    transition: all 0.4s ease;
+}
+
+.ribbon:hover {
+    transform: rotate(0deg) scale(1.05);
+    background-color: #FB8500;
+    color: white;
+}
+
+.ribbon h1 {
+    color: inherit;
+    font-size: 2.5rem;
+}
+
+.btn-ingresar {
+    display: inline-block;
+    padding: 15px 50px;
+    background: linear-gradient(45deg, #FFB703, #FB8500);
+    color: #023047;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 40px;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(255, 183, 3, 0.4);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-ingresar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: all 0.6s ease;
+}
+
+.btn-ingresar:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 183, 3, 0.6);
+}
+
+.btn-ingresar:hover::before {
+    left: 100%;
+}
+
+/* Estilos para las páginas internas */
+main {
+    padding: 40px 5%;
+    min-height: calc(100vh - 160px);
+}
+
+/* Estilos comunes para secciones */
+.invitation-section {
+    padding: 60px 5%;
+    display: flex;
+    justify-content: center;
+    background: url('https://images.unsplash.com/photo-1519378737425-c639a1eaa1a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    min-height: calc(100vh - 160px);
+}
+
+.invitation-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(142, 202, 230, 0.9);
+}
+
+.invitation-card {
+    background: white;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    border: 2px solid #FFB703;
+    margin: 30px 0;
+}
+
+.invitation-card h2 {
+    color: #023047;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    position: relative;
+}
+
+.invitation-card h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #FFB703, #FB8500);
+}
+
+.invitation-card p {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Estilos para padres.html y padrinos.html */
+.parents-container, .godparents-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.parent-card, .godparent-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    margin: 15px;
+    border: 1px solid #FFB703;
+}
+
+.parent-card::before, .godparent-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #FFB703, #FB8500);
+}
+
+.parent-card:hover, .godparent-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.dome-photo {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 25px;
+    border-radius: 50% 50% 0 0;
+    overflow: hidden;
+    border: 5px solid #8ECAE6;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+.parent-card:hover .dome-photo, .godparent-card:hover .dome-photo {
+    border-color: #FFB703;
+    transform: scale(1.05);
+}
+
+.dome-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+.parent-card:hover .dome-photo img, .godparent-card:hover .dome-photo img {
+    transform: scale(1.1);
+}
+
+.parent-card h7, .godparent-card h7 {
+    color: #023047;
+    margin-top: 20px;
+    font-size: 1.3rem;
+    transition: all 0.4s ease;
+}
+
+.parent-card:hover h7, .godparent-card:hover h7 {
+    color: #FB8500;
+}
+
+.godparents-section h3 {
+    color: #023047;
+    margin: 30px 0 20px;
+    font-size: 1.8rem;
+    position: relative;
+}
+
+.godparents-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #FFB703, #FB8500);
+}
+
+/* Estilos para fecha.html */
+.countdown-container {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-right: 4px solid #FFB703;
+}
+
+.countdown-container h3 {
+    color: #023047;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+#countdown div {
+    background: linear-gradient(135deg, #219EBC, #023047);
+    color: white;
+    padding: 20px 25px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    min-width: 100px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+#countdown div:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, #FFB703, #FB8500);
+    box-shadow: 0 10px 25px rgba(255, 183, 3, 0.3);
+}
+
+#countdown div span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.location-section {
+    margin: 40px 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #FFB703;
+}
+
+.location-info {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.location-info h3 {
+    color: #023047;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.location-info h3 i {
+    margin-right: 10px;
+    color: #FB8500;
+}
+
+.location-info p {
+    margin: 10px 0;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.location-info p i {
+    margin-right: 10px;
+    color: #219EBC;
+    width: 20px;
+    text-align: center;
+}
+
+.map {
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.map iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+}
+
+/* Estilos para invitación poética */
+.poetic-invitation {
+    font-family: 'Dancing Script', cursive, 'Poppins', sans-serif;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.poetic-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #023047;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.poetic-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(90deg, #FFB703, #FB8500);
+}
+
+.poem-stanza {
+    margin: 25px 0;
+    line-height: 1.8;
+    font-size: 1.3rem;
+    color: #023047;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: calc(0.2s * var(--stanza-index));
+}
+
+.poem-stanza p {
+    margin: 10px 0;
+}
+
+.poetic-signature {
+    font-style: italic;
+    margin-top: 40px;
+    font-size: 1.2rem;
+    color: #FB8500;
+    font-weight: 500;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Asignar índices para animación escalonada */
+.poem-stanza:nth-child(1) { --stanza-index: 1; }
+.poem-stanza:nth-child(2) { --stanza-index: 2; }
+.poem-stanza:nth-child(3) { --stanza-index: 3; }
+.poem-stanza:nth-child(4) { --stanza-index: 4; }
+.poetic-signature { --stanza-index: 5; }
+
+/* Estilos para el video vertical */
+.video-container {
+    max-width: 400px;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.vertical-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #000;
+}
+
+/* Estilo para el botón de reproducción */
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #FFB703, #FB8500);
+    color: #023047;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.play-btn i {
+    margin-right: 8px;
+}
+
+/* Efecto de borde decorativo */
+.video-container::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid #FFB703;
+    border-radius: 25px;
+    z-index: -1;
+    animation: pulse 4s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.02); opacity: 1; }
+}
+
+/* Botón de WhatsApp */
+.whatsapp-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #25D366, #128C7E);
+    color: white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 40px;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    font-size: 1.1rem;
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.6s ease;
+}
+
+.whatsapp-btn:hover::before {
+    left: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+    .parents-container, .godparents-container {
+        gap: 30px;
+    }
+    
+    .parent-card, .godparent-card {
+        width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 0;
+    }
+    
+    .oval-photo {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .ribbon h1 {
+        font-size: 2rem;
+    }
+    
+    .btn-ingresar {
+        padding: 12px 40px;
+        font-size: 1.1rem;
+    }
+    .invitation-section {
+        padding: 0 15px;
+    }
+
+    .invitation-card {
+        padding: 15px;
+    }
+    
+    .parents-section h2, .godparents-section h2, 
+    .date-section h2, .invitation-card h2 {
+        font-size: 2rem;
+    }
+    
+    .dome-photo {
+        width: 180px;
+        height: 180px;
+    }
+    
+    #countdown div {
+        padding: 15px 20px;
+        min-width: 80px;
+        font-size: 1.2rem;
+    }
+    
+    #countdown div span {
+        font-size: 2rem;
+    }
+    
+    .map iframe {
+        height: 350px;
+    }
+    
+    .poetic-title {
+        font-size: 2.5rem;
+    }
+    
+    .poem-stanza {
+        font-size: 1.1rem;
+    }
+    
+    .invitation-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .location-info p, .poetic-signature {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body{        
+        min-width: 400px;
+    }
+    .main-container {
+        padding-top: 40px;
+    }
+    
+    .parents-container, .godparents-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #countdown {
+        gap: 10px;
+    }
+    
+    #countdown div {
+        padding: 12px 15px;
+        min-width: 70px;
+        font-size: 1rem;
+    }
+    
+    #countdown div span {
+        font-size: 1.8rem;
+    }
+    
+    .map iframe {
+        height: 250px;
+    }
+    
+    .invitation-card {
+        padding: 10px 10px;
+    }
+    
+    .invitation-card p {
+        font-size: 0.95rem;
+        line-height: 1rem;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    .whatsapp-btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+    
+    .location-info p, .poetic-signature {
+        font-size: 0.95rem;
+    }
+    
+    .location-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    .countdown-container h3 {
+        font-size: 1.5rem;
+    }
+    
+    .location-section, .countdown-container {
+        padding: 15px;
+    }
+}
