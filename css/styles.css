@@ -79,7 +79,7 @@ body {
 }
 
 .moving-ribbon {
-    width: 350px;
+    width: 450px;
     height: auto;
     animation: floatRibbon 3s ease-in-out infinite alternate;
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
@@ -584,6 +584,10 @@ main {
     .oval-photo {
         width: 200px;
         height: 200px;
+    }
+
+    .moving-ribbon {
+        width: 250px;
     }
     
     .ribbon h1 {
