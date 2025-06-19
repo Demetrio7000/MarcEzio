@@ -19,20 +19,20 @@
         <div class="oval-photo">
             <img src="img/foto1.jpg" alt="Marc Ezio">
         </div>
-        <div class="ribbon">
-            <h1>Marc Ezio</h1>
+        <div class="ribbon-decoration">
+            <img src="img/liston.png" alt="Listón decorativo" class="moving-ribbon">
         </div>
-        <a href="mi-bautizo.html" class="btn-ingresar" id="ingresarBtn">Ingresando (5)</a>
+        <a href="mi-bautizo.html" class="btn-ingresar" id="ingresarBtn">Ingresando (10)</a>
     </div>
 
     <script>
         // Redirección automática después de 5 segundos
         setTimeout(function() {
             window.location.href = "mi-bautizo.html";
-        }, 5000);
+        }, 10000);
 
         // Contador regresivo en el botón
-        let seconds = 5;
+        let seconds = 10;
         const ingresarBtn = document.getElementById('ingresarBtn');
         
         const countdown = setInterval(function() {
@@ -43,6 +43,43 @@
                 clearInterval(countdown);
             }
         }, 1000);
+
+        // Configuración de música para la página de inicio
+        document.addEventListener('DOMContentLoaded', function() {
+        const music = new Audio('musica/intro.mp3');
+        music.loop = true;
+        music.volume = 0.3;
+        
+        // Intentar reproducir automáticamente
+        const promise = music.play();
+        
+        if (promise !== undefined) {
+            promise.catch(error => {
+                // Mostrar instrucción para el usuario
+                const message = document.createElement('div');
+                message.className = 'music-message';
+                message.innerHTML = 'Haz clic en cualquier parte para activar la música';
+                document.querySelector('.main-container').appendChild(message);
+                
+                // Reproducir después de interacción
+                document.body.addEventListener('click', function() {
+                    music.play();
+                    message.remove();
+                }, { once: true });
+            });
+        }
+        
+        // Guardar referencia para poder pausar al salir
+        window.backgroundMusic = music;
+    });
+
+    // Redirección asegurando detener la música
+    setTimeout(function() {
+        if (window.backgroundMusic) {
+            window.backgroundMusic.pause();
+        }
+        window.location.href = "mi-bautizo.html";
+    }, 10000);
     </script>
 </body>
 </html>

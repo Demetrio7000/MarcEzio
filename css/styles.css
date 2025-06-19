@@ -62,36 +62,39 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
+/* index index index index index index index */
 .oval-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.ribbon {
-    background-color: #FFB703;
-    color: #023047;
-    padding: 15px 40px;
-    border-radius: 30px;
-    margin: 20px 0;
+.ribbon-decoration {
+    padding-top: 20px;
     position: relative;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    font-weight: 600;
-    font-size: 1.2rem;
-    transform: rotate(-2deg);
-    transition: all 0.4s ease;
+    width: 100%;
+    margin: -20px 0 20px;
+    z-index: 1;
+    text-align: center;
 }
 
-.ribbon:hover {
-    transform: rotate(0deg) scale(1.05);
-    background-color: #FB8500;
-    color: white;
+.moving-ribbon {
+    width: 450px;
+    height: auto;
+    animation: floatRibbon 3s ease-in-out infinite alternate;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
 }
 
-.ribbon h1 {
-    color: inherit;
-    font-size: 2.5rem;
+@keyframes floatRibbon {
+    0% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(0) rotate(5deg);
+    }
 }
 
 .btn-ingresar {
@@ -103,7 +106,7 @@ body {
     border-radius: 50px;
     font-size: 1.2rem;
     font-weight: bold;
-    margin-top: 40px;
+    margin-top: 10px;
     transition: all 0.4s ease;
     box-shadow: 0 5px 20px rgba(255, 183, 3, 0.4);
     position: relative;
@@ -143,8 +146,9 @@ main {
     padding: 60px 5%;
     display: flex;
     justify-content: center;
-    background: url('https://images.unsplash.com/photo-1519378737425-c639a1eaa1a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
-    background-size: cover;
+    background: url(../img/fondo.jpg);
+    background-repeat: repeat;
+    background-size: 500px;
     position: relative;
     min-height: calc(100vh - 160px);
 }
@@ -156,7 +160,7 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(142, 202, 230, 0.9);
+    background: rgba(142, 202, 230, 0.5);
 }
 
 .invitation-card {
