@@ -79,7 +79,7 @@ body {
 }
 
 .moving-ribbon {
-    width: 450px;
+    width: 350px;
     height: auto;
     animation: floatRibbon 3s ease-in-out infinite alternate;
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
