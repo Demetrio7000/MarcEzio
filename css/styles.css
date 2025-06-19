@@ -401,7 +401,7 @@ main {
 .poetic-invitation {
     font-family: 'Dancing Script', cursive, 'Poppins', sans-serif;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .poetic-title {
@@ -536,7 +536,7 @@ main {
     border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
-    margin-top: 40px;
+    margin-top: 20px;
     transition: all 0.4s ease;
     box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
     position: relative;

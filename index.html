@@ -12,6 +12,25 @@
         body {
             padding-top: 0 !important;
         }
+        .music-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FFB703;
+            color: #023047;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -26,8 +45,11 @@
     </div>
 
     <script>
-        // Redirección automática después de 5 segundos
+        // Redirección automática después de 10 segundos
         setTimeout(function() {
+            if (window.backgroundMusic) {
+                window.backgroundMusic.pause();
+            }
             window.location.href = "mi-bautizo.html";
         }, 10000);
 
@@ -46,40 +68,58 @@
 
         // Configuración de música para la página de inicio
         document.addEventListener('DOMContentLoaded', function() {
-        const music = new Audio('musica/intro.mp3');
-        music.loop = true;
-        music.volume = 0.3;
-        
-        // Intentar reproducir automáticamente
-        const promise = music.play();
-        
-        if (promise !== undefined) {
-            promise.catch(error => {
-                // Mostrar instrucción para el usuario
+            const music = new Audio('musica/intro.mp3');
+            music.loop = true;
+            music.volume = 0.3;
+            
+            // Guardar referencia para poder pausar al salir
+            window.backgroundMusic = music;
+
+            // Función para manejar la reproducción
+            function handlePlay() {
+                music.play()
+                    .then(() => {
+                        // Ocultar mensaje si existe
+                        const message = document.querySelector('.music-message');
+                        if (message) message.remove();
+                    })
+                    .catch(error => {
+                        console.log("Error al reproducir:", error);
+                        showPlayMessage();
+                    });
+            }
+
+            // Mostrar mensaje de activación
+            function showPlayMessage() {
+                // Si ya hay un mensaje, no hacer nada
+                if (document.querySelector('.music-message')) return;
+                
                 const message = document.createElement('div');
                 message.className = 'music-message';
-                message.innerHTML = 'Haz clic en cualquier parte para activar la música';
-                document.querySelector('.main-container').appendChild(message);
-                
-                // Reproducir después de interacción
-                document.body.addEventListener('click', function() {
-                    music.play();
-                    message.remove();
-                }, { once: true });
-            });
-        }
-        
-        // Guardar referencia para poder pausar al salir
-        window.backgroundMusic = music;
-    });
+                message.textContent = 'Toca aquí para activar la música';
+                document.body.appendChild(message);
 
-    // Redirección asegurando detener la música
-    setTimeout(function() {
-        if (window.backgroundMusic) {
-            window.backgroundMusic.pause();
-        }
-        window.location.href = "mi-bautizo.html";
-    }, 10000);
+                // Intentar reproducir al hacer clic
+                message.addEventListener('click', function() {
+                    handlePlay();
+                });
+
+                // También permitir clic en cualquier parte de la página
+                document.body.addEventListener('click', function() {
+                    handlePlay();
+                }, { once: true });
+
+                // Eliminar el mensaje después de 10 segundos
+                setTimeout(() => {
+                    if (document.contains(message)) {
+                        message.remove();
+                    }
+                }, 10000);
+            }
+
+            // Intentar reproducir automáticamente
+            handlePlay();
+        });
     </script>
 </body>
 </html>
