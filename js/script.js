@@ -78,9 +78,7 @@ function initializeMusic() {
     else if (path.includes('fecha')) musicFile = 'fecha.mp3';
     else if (path.includes('invitacion')) musicFile = 'intro.mp3';
     else if (path.includes('mi-bautizo')) {
-        // Detener música si estamos en mi-bautizo
-        if (currentMusic) currentMusic.pause();
-        localStorage.setItem('musicState', 'paused');
+        // No reproducir música en mi-bautizo (tiene su propio video)
         return;
     }
 
@@ -90,28 +88,21 @@ function initializeMusic() {
     music.loop = true;
     document.getElementById('musicControls').style.display = 'flex';
 
-    // Manejar el estado persistente
-    const savedState = localStorage.getItem('musicState') || 'paused';
-    musicStatus.textContent = savedState === 'playing' ? 'Pausar' : 'Reproducir';
-
-    // Intentar reproducir si estaba activo
-    if (savedState === 'playing') {
-        const tryPlay = () => {
-            music.play()
-                .then(() => {
-                    musicStatus.textContent = 'Pausar';
-                })
-                .catch(e => {
-                    console.log("Autoplay bloqueado:", e);
-                    if (/Mobi|Android/i.test(navigator.userAgent)) {
-                        showMobilePlayMessage(music, musicStatus);
-                    }
-                });
-        };
-        
-        // Pequeño retraso para asegurar la carga
-        setTimeout(tryPlay, 300);
-    }
+    // Siempre intentar reproducir la música
+    const tryPlay = () => {
+        music.play()
+            .then(() => {
+                musicStatus.textContent = 'Pausar';
+                localStorage.setItem('musicState', 'playing');
+            })
+            .catch(e => {
+                console.log("Autoplay bloqueado:", e);
+                showMobilePlayMessage(music, musicStatus);
+            });
+    };
+    
+    // Pequeño retraso para asegurar la carga
+    setTimeout(tryPlay, 300);
 
     // Configurar el controlador del botón
     musicToggle.addEventListener('click', function() {
@@ -140,7 +131,11 @@ function toggleMusic(music, musicStatus) {
 
 // Mostrar mensaje para móviles
 function showMobilePlayMessage(music, musicStatus) {
+    // Si ya hay un mensaje, no hacer nada
+    if (document.getElementById('music-activation-message')) return;
+    
     const msg = document.createElement('div');
+    msg.id = 'music-activation-message';
     msg.style.position = 'fixed';
     msg.style.bottom = '20px';
     msg.style.left = '0';
@@ -150,7 +145,9 @@ function showMobilePlayMessage(music, musicStatus) {
     msg.style.padding = '10px';
     msg.style.textAlign = 'center';
     msg.style.zIndex = '10000';
-    msg.textContent = 'Toca aquí para activar la música';
+    msg.style.borderRadius = '5px';
+    msg.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+    msg.textContent = 'Toca en cualquier parte para activar la música';
     document.body.appendChild(msg);
 
     const activateMusic = () => {
@@ -162,6 +159,13 @@ function showMobilePlayMessage(music, musicStatus) {
             })
             .catch(e => console.log("Error al activar:", e));
     };
+
+    // Eliminar el mensaje después de 10 segundos si no se interactúa
+    setTimeout(() => {
+        if (document.getElementById('music-activation-message')) {
+            msg.remove();
+        }
+    }, 10000);
 
     document.addEventListener('click', activateMusic, { once: true });
 }
